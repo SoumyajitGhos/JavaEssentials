@@ -11,7 +11,7 @@ public class OurLinkedList<T> {
         }
     }
 
-    private Node<T> head = null;
+    private Node<T> head;
 
     public void add(T data) {
         Node<T> newNode = new Node<T>(data);
@@ -30,6 +30,31 @@ public class OurLinkedList<T> {
         Node<T> newNode = new Node<T>(data);
         newNode.next = head;
         head = newNode;
+    }
+
+    public void addAtPosition(int position, T data) {
+        if(position <= 0) {
+            System.out.println("Invalid position");
+            return;
+        }
+
+        if (position == 1) addAtFirst(data);
+
+        Node<T> newNode = new Node<T>(data);
+        Node<T> curr = head;
+        int positionCounter = 1;
+
+        while(curr != null && positionCounter != position - 1) {
+            positionCounter++;
+            curr = curr.next;
+        }
+        if (curr == null) {
+            System.out.println("The position is not present");
+            return;
+        }
+
+        newNode.next = curr.next;
+        curr.next = newNode;
     }
 
     public void delete(T data) {
